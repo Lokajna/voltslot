@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 150 10% 96%;
+    --foreground: 160 10% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 160 10% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 160 10% 10%;
+
+    --primary: 152 69% 41%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 152 50% 90%;
+    --secondary-foreground: 152 69% 30%;
+
+    --muted: 150 10% 93%;
+    --muted-foreground: 150 5% 45%;
+
+    --accent: 152 69% 41%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 150 10% 88%;
+    --input: 150 10% 88%;
+    --ring: 152 69% 41%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 160 10% 10%;
+    --sidebar-primary: 152 69% 41%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 150 10% 93%;
+    --sidebar-accent-foreground: 160 10% 10%;
+    --sidebar-border: 150 10% 88%;
+    --sidebar-ring: 152 69% 41%;
+  }
+
+  .dark {
+    --background: 160 15% 4%;
+    --foreground: 150 10% 93%;
+
+    --card: 160 15% 7%;
+    --card-foreground: 150 10% 93%;
+
+    --popover: 160 15% 7%;
+    --popover-foreground: 150 10% 93%;
+
+    --primary: 152 69% 41%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 155 30% 12%;
+    --secondary-foreground: 152 60% 65%;
+
+    --muted: 160 15% 11%;
+    --muted-foreground: 150 8% 55%;
+
+    --accent: 152 69% 41%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 63% 45%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 160 12% 14%;
+    --input: 160 12% 14%;
+    --ring: 152 69% 41%;
+
+    --sidebar-background: 160 15% 5%;
+    --sidebar-foreground: 150 10% 93%;
+    --sidebar-primary: 152 69% 41%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 160 15% 11%;
+    --sidebar-accent-foreground: 150 10% 93%;
+    --sidebar-border: 160 12% 14%;
+    --sidebar-ring: 152 69% 41%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}

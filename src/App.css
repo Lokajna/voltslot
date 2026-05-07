@@ -1,0 +1,75 @@
+#root {
+  min-height: 100vh;
+}
+
+/* Leaflet container */
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+  z-index: 0;
+  background: hsl(160 15% 4%) !important;
+}
+
+/* Custom station marker */
+.custom-station-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Leaflet popup styling for dark theme */
+.leaflet-popup-content-wrapper {
+  border-radius: 16px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+  padding: 0 !important;
+  background: white !important;
+}
+
+.leaflet-popup-content {
+  margin: 10px !important;
+  line-height: 1.5 !important;
+}
+
+.leaflet-popup-tip {
+  background: white !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Zoom controls dark theme */
+.dark .leaflet-control-zoom a {
+  background: hsl(160 15% 10%) !important;
+  color: hsl(150 10% 80%) !important;
+  border: 1px solid hsl(160 12% 18%) !important;
+}
+
+.dark .leaflet-control-zoom a:hover {
+  background: hsl(160 15% 15%) !important;
+}
+
+/* Attribution dark theme */
+.dark .leaflet-control-attribution {
+  background: hsl(160 15% 7% / 0.8) !important;
+  color: hsl(150 8% 45%) !important;
+}
+
+.dark .leaflet-control-attribution a {
+  color: hsl(152 69% 50%) !important;
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(160 12% 20%);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(160 12% 30%);
+}
