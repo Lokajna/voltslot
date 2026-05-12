@@ -17,6 +17,55 @@
   border: none !important;
 }
 
+/* User location marker */
+.user-location-marker {
+  background: transparent !important;
+  border: none !important;
+  position: relative;
+  width: 32px;
+  height: 32px;
+}
+
+.user-location-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #22d3ee;
+  border: 2px solid white;
+  box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.25), 0 6px 16px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.user-location-pulse {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: rgba(34, 211, 238, 0.18);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: userLocationPulse 1.8s ease-out infinite;
+}
+
+@keyframes userLocationPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.75);
+    opacity: 0.9;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.35);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0;
+  }
+}
+
 /* Leaflet popup styling for dark theme */
 .leaflet-popup-content-wrapper {
   border-radius: 16px !important;

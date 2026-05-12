@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useMemo } from "react";
-import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
+import React, { useEffect, useMemo, useState } from "react";
+import { Circle, MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
 import L from "leaflet";
 import { useBooking } from "@/contexts/BookingContext";
 import { Station } from "@/types";
@@ -37,6 +37,15 @@ const createStationIcon = (hasNormal: boolean, hasFast: boolean) => {
   });
 };
 
+const createUserLocationIcon = () => {
+  return L.divIcon({
+    className: "user-location-marker",
+    html: `<div class="user-location-pulse"></div><div class="user-location-dot"></div>`,
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+  });
+};
+
 function FitBounds({ stations }: { stations: Station[] }) {
   const map = useMap();
   React.useEffect(() => {
@@ -56,6 +65,37 @@ interface StationMapProps {
 const StationMap: React.FC<StationMapProps> = ({ onSelectStation, filteredStations, height = "100%" }) => {
   const { stations, chargers } = useBooking();
   const displayStations = filteredStations ?? stations;
+  const [userLocation, setUserLocation] = useState<{
+    lat: number;
+    lng: number;
+    accuracy: number;
+  } | null>(null);
+
+  useEffect(() => {
+    if (!("geolocation" in navigator)) return;
+
+    const watchId = navigator.geolocation.watchPosition(
+      (position) => {
+        setUserLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+          accuracy: position.coords.accuracy,
+        });
+      },
+      () => {
+        setUserLocation(null);
+      },
+      {
+        enableHighAccuracy: true,
+        maximumAge: 10000,
+        timeout: 10000,
+      }
+    );
+
+    return () => {
+      navigator.geolocation.clearWatch(watchId);
+    };
+  }, []);
 
   const stationMeta = useMemo(() => {
     const map: Record<string, { hasNormal: boolean; hasFast: boolean }> = {};
@@ -94,6 +134,20 @@ const StationMap: React.FC<StationMapProps> = ({ onSelectStation, filteredStatio
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <FitBounds stations={displayStations} />
+        {userLocation && (
+          <>
+            <Circle
+              center={[userLocation.lat, userLocation.lng]}
+              radius={Math.max(userLocation.accuracy, 12)}
+              pathOptions={{ color: "#22d3ee", fillColor: "#22d3ee", fillOpacity: 0.12, weight: 1 }}
+            />
+            <Marker
+              position={[userLocation.lat, userLocation.lng]}
+              icon={createUserLocationIcon()}
+              zIndexOffset={1000}
+            />
+          </>
+        )}
         {displayStations.map((station) => {
           const meta = stationMeta[station.id] ?? { hasNormal: true, hasFast: false };
           return (
